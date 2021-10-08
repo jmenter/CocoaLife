@@ -29,6 +29,18 @@ static const NSUInteger kHeight = 400;
     return self;
 }
 
+- (IBAction)frameDelaySlider:(id)sender;
+{
+    self.frameDelay = 1.f / [sender doubleValue];
+}
+
+- (IBAction)randomCeilingSlider:(NSSlider *)sender;
+{
+    self.randomCeiling = [sender maxValue] - [sender integerValue] + 2;
+    [self randomizeCells];
+    [self incrementGeneration];
+}
+
 - (void)randomizeCells;
 {
     for (int y = 0; y < kHeight; y++) {
