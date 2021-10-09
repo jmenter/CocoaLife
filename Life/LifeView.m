@@ -3,14 +3,16 @@
 #import "NSColor+Extras.h"
 
 @interface LifeView() {
+    @private
     int *_cells;
     int _width;
     int _height;
+    BOOL _isRunning;
+    BOOL _isDirty;
+    BOOL _liveLiveRules[5];
+    BOOL _liveDeadRules[5];
+
 }
-
-@property (nonatomic) BOOL isRunning;
-@property (nonatomic) BOOL isDirty;
-
 @end
 
 @implementation LifeView
@@ -19,17 +21,27 @@
 - (instancetype)initWithCoder:(NSCoder *)coder; { return (self = [super initWithCoder:coder]) ? [self commonInit] : nil; }
 - (instancetype)initWithFrame:(NSRect)frameRect; { return (self = [super initWithFrame:frameRect]) ? [self commonInit] : nil; }
 
+
 - (instancetype)commonInit;
 {
-    _width = 500;
-    _height = 400;
-
+    _width = self.bounds.size.width;
+    _height = self.bounds.size.height;
     _cells = (int *)calloc(_width * _height, sizeof(int));
+    _isRunning = YES;
 
-    self.wantsLayer = YES;
-//    self.layer.backgroundColor = NSColor.transparencyPattern.CGColor;
+    _liveLiveRules[0] = NO;
+    _liveLiveRules[1] = YES;
+    _liveLiveRules[2] = YES;
+    _liveLiveRules[3] = NO;
+    _liveLiveRules[4] = NO;
+
+    _liveDeadRules[0] = NO;
+    _liveDeadRules[1] = NO;
+    _liveDeadRules[2] = YES;
+    _liveDeadRules[3] = NO;
+    _liveDeadRules[4] = NO;
+
     self.scaleMultiplier = 1;
-    self.isRunning = YES;
     self.frameDelay = 1.f / 60.f;
     self.randomCeiling = 3;
     [self randomizeCells];
@@ -37,10 +49,18 @@
     return self;
 }
 
+- (void)configureon:(BOOL)on forRuleAtIndex:(NSUInteger)index;
+{
+    if (index > 4) {
+        _liveDeadRules[index - 5] = on;
+    } else {
+        _liveLiveRules[index] = on;
+    }
+}
+
 - (void)reconfigureCellArray;
 {
-    NSLog(@"reconfiguring cell array");
-    self.isDirty = YES;
+    _isDirty = YES;
     _width = self.bounds.size.width / self.scaleMultiplier;
     _height = self.bounds.size.height / self.scaleMultiplier;
     free(_cells);
@@ -60,7 +80,7 @@
 
 - (void)rightMouseDown:(NSEvent *)event;
 {
-    self.isRunning = !self.isRunning;
+    _isRunning = !_isRunning;
     [self incrementGeneration];
 }
 
@@ -72,10 +92,9 @@
 
 - (void)incrementGeneration;
 {
-    if (self.isDirty) {
-        NSLog(@"is dirty, skipping");
-        self.isDirty = NO;
-        if (self.isRunning) {
+    if (_isDirty) {
+        _isDirty = NO;
+        if (_isRunning) {
             [self performSelector:@selector(incrementGeneration) withObject:nil afterDelay:self.frameDelay];
         }
         return;
@@ -96,22 +115,37 @@
             int nextX = (x == lastX) ? -lastX :  1;
 
             NSUInteger neighborCount =
-            (_cells[x + prevX + yOffset + prevY * _width ]) + (_cells[x + yOffset + prevY * _width]) + (_cells[x + nextX + yOffset + prevY * _width]) +
-            (_cells[x + prevX + yOffset        ]) +                              (_cells[x + nextX + yOffset        ]) +
+            (_cells[x + prevX + yOffset + prevY * _width]) + (_cells[x + yOffset + prevY * _width]) + (_cells[x + nextX + yOffset + prevY * _width]) +
+            (_cells[x + prevX + yOffset                 ]) +                                          (_cells[x + nextX + yOffset                 ]) +
             (_cells[x + prevX + yOffset + nextY * _width]) + (_cells[x + yOffset + nextY * _width]) + (_cells[x + nextX + yOffset + nextY * _width]);
             
             int cellIsAlive = _cells[x + yOffset];
-            BOOL shouldLiveForLive = (neighborCount == 2 || neighborCount == 3);
-            BOOL shouleLiveForDead = (neighborCount == 3);
-            
-            nextGen[x + yOffset] = cellIsAlive ? (int)shouldLiveForLive : (int)shouleLiveForDead;
+            int shouldLiveForLive = 0;
+            if ((_liveLiveRules[0] && neighborCount == 1) ||
+                (_liveLiveRules[1] && neighborCount == 2) ||
+                (_liveLiveRules[2] && neighborCount == 3) ||
+                (_liveLiveRules[3] && neighborCount == 4) ||
+                (_liveLiveRules[4] && neighborCount == 5)) {
+                shouldLiveForLive = 1;
+            }
+
+            int shouldLiveForDead = 0;
+            if ((_liveDeadRules[0] && neighborCount == 1) ||
+                (_liveDeadRules[1] && neighborCount == 2) ||
+                (_liveDeadRules[2] && neighborCount == 3) ||
+                (_liveDeadRules[3] && neighborCount == 4) ||
+                (_liveDeadRules[4] && neighborCount == 5)) {
+                shouldLiveForDead = 1;
+            }
+
+            nextGen[x + yOffset] = cellIsAlive ? shouldLiveForLive : shouldLiveForDead;
         }
     }
 
     memcpy(_cells, nextGen, sizeof(int) * _width * _height);
     free(nextGen);
     [self assignCellsToLayer];
-    if (self.isRunning) {
+    if (_isRunning) {
         [self performSelector:@selector(incrementGeneration) withObject:nil afterDelay:self.frameDelay];
     }
 }

@@ -9,4 +9,6 @@
 
 - (void)reconfigureCellArray;
 
+- (void)configureon:(BOOL)on forRuleAtIndex:(NSUInteger)index;
+
 @end
