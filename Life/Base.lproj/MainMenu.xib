@@ -702,14 +702,14 @@
         <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="nZw-PL-BMa" userLabel="Settings" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="112" width="276" height="112"/>
+            <rect key="contentRect" x="196" y="112" width="276" height="208"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="SPx-Na-42U">
-                <rect key="frame" x="0.0" y="0.0" width="276" height="112"/>
+                <rect key="frame" x="0.0" y="0.0" width="276" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED2-rU-oxn">
-                        <rect key="frame" x="18" y="68" width="240" height="24"/>
+                        <rect key="frame" x="18" y="140" width="240" height="24"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="5" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Dzo-gr-YK7"/>
                         <connections>
@@ -717,13 +717,40 @@
                         </connections>
                     </slider>
                     <slider verticalHuggingPriority="750" id="6ev-5s-XR1">
-                        <rect key="frame" x="18" y="43" width="240" height="21"/>
+                        <rect key="frame" x="18" y="79" width="240" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="100" doubleValue="60" tickMarkPosition="above" sliderType="linear" id="neq-Vs-Wd4"/>
                         <connections>
                             <action selector="frameDelaySliderChanged:" target="rfz-ee-usD" id="IVr-DL-Nsr"/>
                         </connections>
                     </slider>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OrV-Dt-9iv">
+                        <rect key="frame" x="18" y="172" width="240" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Griddiness" id="AuU-So-OYk">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-fz-rhn">
+                        <rect key="frame" x="18" y="106" width="240" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Frame Rate" id="gVH-cr-CSV">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R11-a0-D1S">
+                        <rect key="frame" x="18" y="45" width="240" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Live/Dead Initialization Ratio" id="b9o-Cm-Z3c">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <slider verticalHuggingPriority="750" id="7b0-qw-7Wm">
                         <rect key="frame" x="18" y="18" width="240" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -734,7 +761,7 @@
                     </slider>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="165" y="-244"/>
+            <point key="canvasLocation" x="165" y="-196"/>
         </window>
         <viewController id="rfz-ee-usD" customClass="LifeViewController">
             <connections>
