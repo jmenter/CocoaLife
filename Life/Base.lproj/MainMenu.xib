@@ -681,65 +681,66 @@
             </items>
             <point key="canvasLocation" x="-100" y="154"/>
         </menu>
-        <window title="Life" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="LifeWindow">
+        <window title="Life" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
+            <rect key="contentRect" x="335" y="390" width="400" height="400"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="302" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="aHE-Ru-A0C" customClass="LifeView">
-                        <rect key="frame" x="0.0" y="0.0" width="302" height="302"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="aHE-Ru-A0C" secondAttribute="height" multiplier="1:1" id="vS4-lw-dbS"/>
-                        </constraints>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aHE-Ru-A0C" customClass="LifeView">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </customView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-232" y="-100"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="cgE-pe-dnY"/>
+        <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="nZw-PL-BMa" userLabel="Settings" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="112" width="276" height="112"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="SPx-Na-42U">
+                <rect key="frame" x="0.0" y="0.0" width="276" height="112"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED2-rU-oxn">
+                        <rect key="frame" x="18" y="68" width="240" height="24"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="5" doubleValue="1" tickMarkPosition="above" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Dzo-gr-YK7"/>
+                        <connections>
+                            <action selector="scalingMultiplierChanged:" target="rfz-ee-usD" id="JOH-6b-vfc"/>
+                        </connections>
+                    </slider>
                     <slider verticalHuggingPriority="750" id="6ev-5s-XR1">
-                        <rect key="frame" x="93" y="333" width="203" height="21"/>
+                        <rect key="frame" x="18" y="43" width="240" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="100" doubleValue="60" tickMarkPosition="above" sliderType="linear" id="neq-Vs-Wd4"/>
                         <connections>
-                            <action selector="frameDelaySlider:" target="aHE-Ru-A0C" id="LCC-rN-pZW"/>
+                            <action selector="frameDelaySliderChanged:" target="rfz-ee-usD" id="IVr-DL-Nsr"/>
                         </connections>
                     </slider>
                     <slider verticalHuggingPriority="750" id="7b0-qw-7Wm">
-                        <rect key="frame" x="93" y="308" width="203" height="21"/>
+                        <rect key="frame" x="18" y="18" width="240" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="2" maxValue="30" doubleValue="10" tickMarkPosition="above" sliderType="linear" id="agg-IA-dtt"/>
                         <connections>
-                            <action selector="randomCeilingSlider:" target="aHE-Ru-A0C" id="J4q-nI-Wpg"/>
+                            <action selector="randomOffsetChanged:" target="rfz-ee-usD" id="aBn-kt-z5B"/>
                         </connections>
                     </slider>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVC-0J-yFV">
-                        <rect key="frame" x="8" y="310" width="86" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Randomness:" id="Jd6-6f-BGc">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8P-vb-t8r">
-                        <rect key="frame" x="8" y="335" width="81" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Framerate:" id="GKw-VL-QGw">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="aHE-Ru-A0C" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="2RM-SS-nbl"/>
-                    <constraint firstAttribute="trailing" secondItem="aHE-Ru-A0C" secondAttribute="trailing" id="EEg-Tk-ABh"/>
-                    <constraint firstItem="aHE-Ru-A0C" firstAttribute="top" secondItem="7b0-qw-7Wm" secondAttribute="bottom" constant="8" symbolic="YES" id="cLn-Kz-Dea"/>
-                    <constraint firstAttribute="bottom" secondItem="aHE-Ru-A0C" secondAttribute="bottom" id="xCH-Q2-bJ8"/>
-                </constraints>
             </view>
-            <point key="canvasLocation" x="-192" y="-120"/>
+            <point key="canvasLocation" x="165" y="-244"/>
         </window>
-        <userDefaultsController representsSharedInstance="YES" id="cgE-pe-dnY"/>
+        <viewController id="rfz-ee-usD" customClass="LifeViewController">
+            <connections>
+                <outlet property="lifeView" destination="aHE-Ru-A0C" id="hzl-VQ-M7f"/>
+                <outlet property="view" destination="EiT-Mj-1SZ" id="FQd-qa-pZg"/>
+            </connections>
+        </viewController>
     </objects>
 </document>

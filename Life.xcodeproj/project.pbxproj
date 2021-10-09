@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630476C72711FAF700B790A0 /* LifeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 630476C52711FAF700B790A0 /* LifeViewController.m */; };
+		630476CD2711FE8A00B790A0 /* NSImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 630476CC2711FE8A00B790A0 /* NSImage+Extras.m */; };
+		630476D1271201AC00B790A0 /* NSColor+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 630476D0271201AC00B790A0 /* NSColor+Extras.m */; };
 		63E905AF270FB07200102559 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E905AE270FB07200102559 /* AppDelegate.m */; };
 		63E905B1270FB07900102559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E905B0270FB07900102559 /* Assets.xcassets */; };
 		63E905B4270FB07900102559 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E905B2270FB07900102559 /* MainMenu.xib */; };
 		63E905B7270FB07900102559 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E905B6270FB07900102559 /* main.m */; };
-		63E905C2270FB11500102559 /* LifeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E905C1270FB11500102559 /* LifeWindow.m */; };
 		63E905C6270FB1B900102559 /* LifeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E905C5270FB1B900102559 /* LifeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630476C42711FAF700B790A0 /* LifeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeViewController.h; sourceTree = "<group>"; };
+		630476C52711FAF700B790A0 /* LifeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeViewController.m; sourceTree = "<group>"; };
+		630476CB2711FE8A00B790A0 /* NSImage+Extras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+Extras.h"; sourceTree = "<group>"; };
+		630476CC2711FE8A00B790A0 /* NSImage+Extras.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Extras.m"; sourceTree = "<group>"; };
+		630476CF271201AC00B790A0 /* NSColor+Extras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Extras.h"; sourceTree = "<group>"; };
+		630476D0271201AC00B790A0 /* NSColor+Extras.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Extras.m"; sourceTree = "<group>"; };
 		63E905AA270FB07200102559 /* Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Life.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E905AD270FB07200102559 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		63E905AE270FB07200102559 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -24,8 +32,6 @@
 		63E905B5270FB07900102559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63E905B6270FB07900102559 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63E905B8270FB07900102559 /* Life.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Life.entitlements; sourceTree = "<group>"; };
-		63E905C0270FB11500102559 /* LifeWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifeWindow.h; sourceTree = "<group>"; };
-		63E905C1270FB11500102559 /* LifeWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifeWindow.m; sourceTree = "<group>"; };
 		63E905C4270FB1B900102559 /* LifeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeView.h; sourceTree = "<group>"; };
 		63E905C5270FB1B900102559 /* LifeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,10 +68,14 @@
 			children = (
 				63E905AD270FB07200102559 /* AppDelegate.h */,
 				63E905AE270FB07200102559 /* AppDelegate.m */,
-				63E905C0270FB11500102559 /* LifeWindow.h */,
-				63E905C1270FB11500102559 /* LifeWindow.m */,
+				630476C42711FAF700B790A0 /* LifeViewController.h */,
+				630476C52711FAF700B790A0 /* LifeViewController.m */,
 				63E905C4270FB1B900102559 /* LifeView.h */,
 				63E905C5270FB1B900102559 /* LifeView.m */,
+				630476CB2711FE8A00B790A0 /* NSImage+Extras.h */,
+				630476CC2711FE8A00B790A0 /* NSImage+Extras.m */,
+				630476CF271201AC00B790A0 /* NSColor+Extras.h */,
+				630476D0271201AC00B790A0 /* NSColor+Extras.m */,
 				63E905B0270FB07900102559 /* Assets.xcassets */,
 				63E905B2270FB07900102559 /* MainMenu.xib */,
 				63E905B5270FB07900102559 /* Info.plist */,
@@ -143,10 +153,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				630476D1271201AC00B790A0 /* NSColor+Extras.m in Sources */,
 				63E905B7270FB07900102559 /* main.m in Sources */,
-				63E905C2270FB11500102559 /* LifeWindow.m in Sources */,
+				630476C72711FAF700B790A0 /* LifeViewController.m in Sources */,
 				63E905AF270FB07200102559 /* AppDelegate.m in Sources */,
 				63E905C6270FB1B900102559 /* LifeView.m in Sources */,
+				630476CD2711FE8A00B790A0 /* NSImage+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

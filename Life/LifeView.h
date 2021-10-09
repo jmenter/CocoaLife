@@ -1,12 +1,12 @@
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface LifeView : NSView
 
 @property (nonatomic) NSTimeInterval frameDelay;
 @property (nonatomic) NSUInteger randomCeiling;
+@property (nonatomic) NSUInteger scaleMultiplier;
 
-- (IBAction)frameDelaySlider:(id)sender;
-- (IBAction)randomCeilingSlider:(id)sender;
+- (void)reconfigureCellArray;
 
 @end
