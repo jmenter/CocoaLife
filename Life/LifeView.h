@@ -9,6 +9,7 @@
 
 - (void)reconfigureCellArray;
 
-- (void)configureon:(BOOL)on forRuleAtIndex:(NSUInteger)index;
+- (void)configureIsOn:(BOOL)isOn forLiveRuleAtIndex:(NSUInteger)index;
+- (void)configureIsOn:(BOOL)isOn forDeadRuleAtIndex:(NSUInteger)index;
 
 @end

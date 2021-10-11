@@ -49,13 +49,14 @@
     return self;
 }
 
-- (void)configureon:(BOOL)on forRuleAtIndex:(NSUInteger)index;
+- (void)configureIsOn:(BOOL)isOn forLiveRuleAtIndex:(NSUInteger)index;
 {
-    if (index > 4) {
-        _liveDeadRules[index - 5] = on;
-    } else {
-        _liveLiveRules[index] = on;
-    }
+    _liveLiveRules[index] = isOn;
+}
+
+- (void)configureIsOn:(BOOL)isOn forDeadRuleAtIndex:(NSUInteger)index;
+{
+    _liveDeadRules[index] = isOn;
 }
 
 - (void)reconfigureCellArray;
@@ -70,11 +71,9 @@
 
 - (void)randomizeCells;
 {
-    for (int y = 0; y < _height; y++) {
-        int yOffset = y * _width;
-        for (int x = 0; x < _width; x++) {
-            _cells[x + yOffset] = (arc4random_uniform((uint32_t)(self.randomCeiling)) == 0) ? 1 : 0;
-        }
+    int ceiling = (int)self.randomCeiling;
+    for (int i = 0; i < (_width * _height); i++) {
+        _cells[i] = (arc4random_uniform((uint32_t)(ceiling)) == 0) ? 1 : 0;
     }
 }
 
@@ -105,40 +104,40 @@
     // create new generation based on the rules
     int lastX = _width - 1, lastY = _height - 1;
     for (int y = 0; y < _height; y++) {
-        int prevY = (y == 0)     ?  lastY : -1;
-        int nextY = (y == lastY) ? -lastY :  1;
-
+        int prevY = ((y == 0)     ?  lastY : -1) * _width;
+        int nextY = ((y == lastY) ? -lastY :  1) * _width;
         int yOffset = y * _width;
+
         for (int x = 0; x < _width; x++) {
-            
+            int index = x + yOffset;
             int prevX = (x == 0)     ?  lastX : -1;
             int nextX = (x == lastX) ? -lastX :  1;
 
             NSUInteger neighborCount =
-            (_cells[x + prevX + yOffset + prevY * _width]) + (_cells[x + yOffset + prevY * _width]) + (_cells[x + nextX + yOffset + prevY * _width]) +
-            (_cells[x + prevX + yOffset                 ]) +                                          (_cells[x + nextX + yOffset                 ]) +
-            (_cells[x + prevX + yOffset + nextY * _width]) + (_cells[x + yOffset + nextY * _width]) + (_cells[x + nextX + yOffset + nextY * _width]);
+            (_cells[index + prevX + prevY]) + (_cells[index + prevY]) + (_cells[index + nextX + prevY]) +
+            (_cells[index + prevX        ]) +                           (_cells[index + nextX        ]) +
+            (_cells[index + prevX + nextY]) + (_cells[index + nextY]) + (_cells[index + nextX + nextY]);
             
-            int cellIsAlive = _cells[x + yOffset];
-            int shouldLiveForLive = 0;
-            if ((_liveLiveRules[0] && neighborCount == 1) ||
+            int cellIsAlive = _cells[index];
+            int cellShouldLive = 0;
+
+            if (cellIsAlive && (
+                (_liveLiveRules[0] && neighborCount == 1) ||
                 (_liveLiveRules[1] && neighborCount == 2) ||
                 (_liveLiveRules[2] && neighborCount == 3) ||
                 (_liveLiveRules[3] && neighborCount == 4) ||
-                (_liveLiveRules[4] && neighborCount == 5)) {
-                shouldLiveForLive = 1;
-            }
-
-            int shouldLiveForDead = 0;
-            if ((_liveDeadRules[0] && neighborCount == 1) ||
+                (_liveLiveRules[4] && neighborCount == 5))) {
+                cellShouldLive = 1;
+            } else if (
+                (_liveDeadRules[0] && neighborCount == 1) ||
                 (_liveDeadRules[1] && neighborCount == 2) ||
                 (_liveDeadRules[2] && neighborCount == 3) ||
                 (_liveDeadRules[3] && neighborCount == 4) ||
                 (_liveDeadRules[4] && neighborCount == 5)) {
-                shouldLiveForDead = 1;
+                cellShouldLive = 1;
             }
 
-            nextGen[x + yOffset] = cellIsAlive ? shouldLiveForLive : shouldLiveForDead;
+            nextGen[index] = cellShouldLive;
         }
     }
 

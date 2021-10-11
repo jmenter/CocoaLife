@@ -10,16 +10,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(windowDidResize) name:NSWindowDidEndLiveResizeNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(windowDidEndLiveResize) name:NSWindowDidEndLiveResizeNotification object:nil];
 }
 
 - (IBAction)checkWasClicked:(NSButton *)sender;
 {
-    BOOL state = sender.state == NSControlStateValueOn;
-    [self.lifeView configureon:state forRuleAtIndex:sender.tag - 1];
+    if (sender.tag > 5) {
+        [self.lifeView configureIsOn:sender.state forDeadRuleAtIndex:sender.tag - 6];
+    } else {
+        [self.lifeView configureIsOn:sender.state forLiveRuleAtIndex:sender.tag - 1];
+    }
 }
 
-- (void)windowDidResize;
+- (void)windowDidEndLiveResize;
 {
     [self.lifeView reconfigureCellArray];
 }
@@ -47,7 +50,7 @@
     windowRect.size = NSMakeSize(quantizedWidth, quantizedHeight + titleBarHeight);
     [NSApplication.sharedApplication.mainWindow setFrame:windowRect display:YES];
     NSApplication.sharedApplication.mainWindow.resizeIncrements = NSMakeSize(multiplier, multiplier);
-    [self windowDidResize];
+    [self windowDidEndLiveResize];
 
     [self configureWindowTitle];
 }
